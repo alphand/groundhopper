@@ -14,8 +14,8 @@
 
     <div class="top-bar-right">
       <ul class="menu menu-right">
-        <li><a v-link="{path:'/register'}">Register</a></li>
-        <li><a v-link="{path:'/login'}">Login</a></li>
+        <li><a v-link="{path:'/accounts/register'}">Register</a></li>
+        <li><a v-link="{path:'/accounts/login'}">Login</a></li>
       </ul>
     </div>
   </div>

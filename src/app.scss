@@ -7,8 +7,12 @@ $global-flexbox: true;
 
 @include foundation-typography;
 
+@include foundation-button;
+
 @include foundation-menu;
 @include foundation-menu-icon;
+
+@include foundation-forms;
 
 @include foundation-flex-grid;
 @include foundation-flex-classes;
