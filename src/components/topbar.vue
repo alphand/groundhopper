@@ -22,6 +22,7 @@
 </template>
 
 <style lang="scss">
+
   .logo {
     height:50px;
     width:auto;

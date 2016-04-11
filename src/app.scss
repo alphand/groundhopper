@@ -1,2 +1,16 @@
 @import "../node_modules/foundation-sites/scss/foundation";
-@include foundation-everything(true);
+// @include foundation-everything(true);
+
+@include foundation-global-styles;
+
+$global-flexbox: true;
+
+@include foundation-typography;
+
+@include foundation-menu;
+@include foundation-menu-icon;
+
+@include foundation-flex-grid;
+@include foundation-flex-classes;
+
+@include foundation-top-bar;
