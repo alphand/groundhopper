@@ -1,11 +1,16 @@
 <template>
-  <div class="hp-header">
+  <div>
     <h1>{{ msg }}</h1>
   </div>
 </template>
 
 <script>
+  import topbar from '../components/topbar'
   export default {
+    components: {
+      topbar: topbar
+    },
+
     data () {
       return {
         msg: 'this is from homepage'
@@ -13,9 +18,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .hp-header {
-    font-size:20px;
-  }
-</style>
