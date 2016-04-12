@@ -6,7 +6,6 @@ import Routes from './routes'
 
 Vue.use(VueRouter)
 const router = new VueRouter()
-
 router.map(Routes)
 
 router.start(MainApp, '#main-app')

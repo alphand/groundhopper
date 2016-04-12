@@ -8,11 +8,13 @@
 </template>
 
 <script>
+import store from './store'
 import Topbar from './components/topbar'
 export default {
   components: {
     Topbar
-  }
+  },
+  store
 }
 </script>
 
