@@ -2,13 +2,15 @@
   <div class="login-panel">
     <div class="row">
       <div class="medium-6 medium-centered large-4 large-centered columns">
-        <form class="row column log-in-form"
-          v-on:submit.prevent="onSubmit">
+        <validator name="loginValidator">
+          <form class="row column log-in-form"
+            v-on:submit.prevent="onSubmit">
           <h4>Log in with your email!</h4>
           <div class="form-group">
             <label for="email">Email address:</label>
             <input type="text" id="email" name="email"
-              v-model="email"/>
+              v-model="email"
+              v-validate:username="{required:true}"/>
           </div>
           <div class="form-group">
             <label for="password">Password:</label>
@@ -20,12 +22,16 @@
             <label for="show-password">show password</label>
           </div>
           <div class="form-actions">
+            <div class="errors">
+              <p v-if="$loginValidator.username.required">Email is required</p>
+            </div>
             <button type="submit" class="button expanded">Submit</button>
           </div>
           <div class="form-group">
             <a href="">Forgot your password?</a>
           </div>
         </form>
+        </validator>
       </div>
     </div>
   </div>
