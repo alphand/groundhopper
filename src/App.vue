@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import store from './store'
+import store from './vuex/store'
 import Topbar from './components/topbar'
 export default {
   components: {

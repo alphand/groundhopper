@@ -1,10 +1,11 @@
 <template>
   <div class="login-panel">
     <div class="row align-center">
-      <div class="medium-6 large-4 column">
+      <div class="column medium-6 large-4">
         <validator name="loginValidator">
           <form class="log-in-form"
             v-on:submit.prevent="onSubmit">
+            <p>isLoading: {{isLoading}}</p>
             <h4>Log in with your email!</h4>
             <div class="form-group">
               <label for="email">
@@ -53,6 +54,8 @@
 </template>
 
 <script>
+import { loginRequest } from '../../vuex/actions'
+
 export default {
   data () {
     return {
@@ -64,7 +67,18 @@ export default {
 
   methods: {
     onSubmit () {
-      console.log('submitting-data', this.email, this.password, this.$loginValidator)
+      console.log('submitting-data', this)
+      const {email, password} = this
+      this.loginRequest({email, password})
+    }
+  },
+
+  vuex: {
+    getters: {
+      isLoading: (state) => state.isLoading
+    },
+    actions: {
+      loginRequest: loginRequest
     }
   }
 }

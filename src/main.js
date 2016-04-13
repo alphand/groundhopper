@@ -7,6 +7,7 @@ import Routes from './routes'
 
 Vue.use(VueRouter)
 Vue.use(VueValidator)
+
 const router = new VueRouter()
 router.map(Routes)
 
