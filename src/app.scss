@@ -13,6 +13,7 @@ $global-flexbox: true;
 @include foundation-menu-icon;
 
 @include foundation-forms;
+@include form-error; 
 
 @include foundation-flex-grid;
 @include foundation-flex-classes;
