@@ -1,0 +1,5 @@
+groundhopper:
+  build: .
+  command: echo 'ready'
+  volumes:
+    - .:/home/app/groundhopper  
