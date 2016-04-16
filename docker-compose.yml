@@ -1,11 +1,7 @@
 groundhopper:
   build: .
-  command: go build -o main .
-  environment:
-    - GOPATH:"/home/app/groundhopper/server"
-    - GOBIN:"/home/app/groundhopper/server/bin"
-  entrypoint: /home/app/groundhopper/server/src/main
+  command: gin run
   volumes:
     - ./server:/home/app/groundhopper/server
   ports:
-    - "9000:9000"
+    - "3000:3000"
