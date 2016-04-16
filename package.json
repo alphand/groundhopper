@@ -1,7 +1,7 @@
 {
-  "name": "glasspilot",
-  "version": "1.0.0",
-  "description": "A Vue.js project",
+  "name": "groundhopper",
+  "version": "0.1.0",
+  "description": "Dynamically landing page site",
   "author": "Niko Darmawan <darmawan.niko@gmail.com>",
   "private": true,
   "scripts": {
