@@ -14,6 +14,9 @@ const setLoader = (state, val = false) => {
 }
 
 const state = {
+  user:{
+    authenticated:false
+  },
   isLoading: false
 }
 

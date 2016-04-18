@@ -1,15 +1,14 @@
 import Vue from './apiBase'
-import config from '../config'
 
 export const getLogin = (email, password) => {
-  const accEndPoints = config.DBRoot + 'lvo-accounts/' +
-    '/lvo-accounts/_design/email_finder/_view/email_finder'
+  const accEndPoints = '/api/proxy/192.168.99.100:5984/lvo-accounts/' +
+    '_design/email_finder/_view/email_finder'
 
   const opts = {
     url: accEndPoints,
     method: 'GET',
     params: {
-      key: email
+      key: JSON.stringify(email)
     }
   }
 
