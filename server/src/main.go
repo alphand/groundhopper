@@ -3,7 +3,8 @@ package main
 import (
   "os"
   "log"
-  "net/http"
+  
+  "github.com/codegangsta/negroni"
 )
 
 func main() {
@@ -13,15 +14,9 @@ func main() {
   }
 
   router := NewRouter()
-  server := http.Server{
-      Addr: ":"+port,
-      Handler: router,
-  }
 
-  err := server.ListenAndServe()
-  if err != nil {
-    log.Fatal("Could not listen: ", err)
-  } else {
-    log.Println("Ready to Serve on :%s", port)
-  }
+  n := negroni.Classic()
+  n.UseHandler(router)
+
+  n.Run(":" + port)
 }

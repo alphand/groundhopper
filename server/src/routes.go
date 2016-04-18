@@ -24,4 +24,10 @@ var routes = Routes {
     "/api/accounts",
     AccountsIndex,
   },
+  Route{
+    "GetProxyIndex",
+    "GET",
+    `/proxy/{rest:[a-zA-Z0-9=\-\/_:\.]+}`,
+    ProxyHandler,
+  },
 }
