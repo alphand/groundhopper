@@ -1,9 +1,9 @@
 package main
 
 import (
+  "proxy"
+
   "net/http"
-  "net/http/httputil"
-  "net/url"
 
   "fmt"
   "runtime"
@@ -11,38 +11,13 @@ import (
   "github.com/gorilla/mux"
 )
 
-type Prox struct {
-  target        *url.URL
-  proxy         *httputil.ReverseProxy
-}
-
-func NewHostReverseProxy(target *url.URL) *httputil.ReverseProxy {
-  director := func(req *http.Request) {
-          req.URL.Scheme = target.Scheme
-          req.URL.Host = target.Host
-          req.URL.Path = target.Path
-  }
-  return &httputil.ReverseProxy{Director: director}
-}
-
-func New(target string) *Prox {
-  locurl, _ := url.Parse(target)
-  proxy := NewHostReverseProxy(locurl)
-  return &Prox{target: locurl, proxy: proxy}
-}
-
-func (p *Prox) handle (w http.ResponseWriter, r *http.Request) {
-  w.Header().Set("X-GoProxy", "GoProxy")
-  p.proxy.ServeHTTP(w, r)
-}
-
 func ProxyHandler (w http.ResponseWriter, r *http.Request) {
   vars := mux.Vars(r)
 
   url := "http://" + vars["rest"]
-  proxy := New(url)
+  proxyEn := proxy.New(url)
 
-  proxy.handle(w, r)
+  proxyEn.Handle(w, r)
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
