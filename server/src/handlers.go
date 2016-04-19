@@ -9,11 +9,6 @@ import (
   "runtime"
 
   "github.com/gorilla/mux"
-
-  // "github.com/dgrijalva/jwt-go"
-  // "github.com/gorilla/context"
-  // "github.com/auth0/go-jwt-middleware"
-
 )
 
 func ProxyHandler (w http.ResponseWriter, r *http.Request) {

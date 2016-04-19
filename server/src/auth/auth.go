@@ -10,38 +10,15 @@ import (
   "fmt"
   "time"
 
+  "auth/models"
+
   // "github.com/dgrijalva/jwt-go"
   // "github.com/gorilla/context"
   // "github.com/auth0/go-jwt-middleware"k
 )
 
-type Auth struct {
-  Authenticated     bool        `json:"authenticated"`
-  TokenId           string      `json:"tokenId"`
-  Expires           int64  `json:"expires"`
-}
 
-type EmailFinder struct {
-  TotalRows int `json:"total_rows"`
-  Offset int `json:"offset"`
-  Rows []struct {
-    ID string `json:"id"`
-    Key string `json:"key"`
-    Value struct {
-      ID string `json:"_id"`
-      Rev string `json:"_rev"`
-      Email string `json:"email"`
-      Password string `json:"password"`
-    } `json:"value"`
-  } `json:"rows"`
-}
-
-type EmailCred struct {
-  Email string
-  Password string
-}
-
-func getAccount(email string) (*EmailCred, error) {
+func getAccount(email string) (*models.EmailCred, error) {
   keyemail, _ := json.Marshal(email)
   url := fmt.Sprintf("http://192.168.99.100:5984/lvo-accounts/_design/email_finder/_view/email_finder?key=%s", keyemail)
 
@@ -61,7 +38,7 @@ func getAccount(email string) (*EmailCred, error) {
 
   defer resp.Body.Close()
 
-  var data EmailFinder
+  var data models.EmailFinder
   if err := json.NewDecoder(resp.Body).Decode(&data); err != nil {
     log.Println(err)
     return nil, err
@@ -73,19 +50,25 @@ func getAccount(email string) (*EmailCred, error) {
     return nil, errors.New("No email found!")
   }
 
-  return &EmailCred{
+  return &models.EmailCred{
     Email: data.Rows[0].Value.Email,
     Password: data.Rows[0].Value.Password,
   }, nil;
 }
 
-func authenticate(email string, password string) (*Auth, error) {
+func authenticate(email string, password string) (*models.Auth, error) {
   acc, err := getAccount(email)
   if err != nil {
     return nil, err
   }
 
-  return &Auth{
+  if (acc != nil && acc.Password != password) {
+    return &models.Auth {
+      Authenticated: false,
+    }, nil
+  }
+
+  return &models.Auth{
     Authenticated:false,
     TokenId: acc.Email,
     Expires:time.Now().Add(time.Minute * 3).Unix(),
@@ -94,13 +77,8 @@ func authenticate(email string, password string) (*Auth, error) {
 
 func PostCreateSession(w http.ResponseWriter, r *http.Request) {
 
-  type Creds struct {
-    Email string `json:"email"`
-    Password string `json:"password"`
-  }
-
   decoder := json.NewDecoder(r.Body)
-  var cred Creds
+  var cred models.PostCreds
   err := decoder.Decode(&cred)
 
   if err != nil {
@@ -124,7 +102,4 @@ func PostCreateSession(w http.ResponseWriter, r *http.Request) {
   if err := json.NewEncoder(w).Encode(authData); err != nil {
     panic(err)
   }
-
-  // log.Printf("decode param: email => %s, pass => %s", cred.Email, cred.Password)
-  // fmt.Fprintf (w, "Post create session: %s -- %s", cred.Email, cred.Password)
 }
