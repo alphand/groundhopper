@@ -9,6 +9,10 @@ import (
   "log"
   "fmt"
   "time"
+
+  // "github.com/dgrijalva/jwt-go"
+  // "github.com/gorilla/context"
+  // "github.com/auth0/go-jwt-middleware"k
 )
 
 type Auth struct {
@@ -75,8 +79,7 @@ func getAccount(email string) (*EmailCred, error) {
   }, nil;
 }
 
-
-func Authenticate(email string, password string) (*Auth, error) {
+func authenticate(email string, password string) (*Auth, error) {
   acc, err := getAccount(email)
   if err != nil {
     return nil, err
@@ -87,4 +90,41 @@ func Authenticate(email string, password string) (*Auth, error) {
     TokenId: acc.Email,
     Expires:time.Now().Add(time.Minute * 3).Unix(),
   }, nil
+}
+
+func PostCreateSession(w http.ResponseWriter, r *http.Request) {
+
+  type Creds struct {
+    Email string `json:"email"`
+    Password string `json:"password"`
+  }
+
+  decoder := json.NewDecoder(r.Body)
+  var cred Creds
+  err := decoder.Decode(&cred)
+
+  if err != nil {
+    panic("Cannot decode")
+  }
+
+  authData, err := authenticate(cred.Email, cred.Password)
+
+  if err != nil {
+    w.Header().Set("Content-Type","application/json;charset=UTF-8")
+    w.WriteHeader(422)
+    if err := json.NewEncoder(w).Encode(err); err != nil {
+      panic(err)
+    }
+  }
+
+  log.Println(authData)
+
+  w.Header().Set("Content-Type","application/json;charset=UTF-8")
+  w.WriteHeader(http.StatusCreated)
+  if err := json.NewEncoder(w).Encode(authData); err != nil {
+    panic(err)
+  }
+
+  // log.Printf("decode param: email => %s, pass => %s", cred.Email, cred.Password)
+  // fmt.Fprintf (w, "Post create session: %s -- %s", cred.Email, cred.Password)
 }

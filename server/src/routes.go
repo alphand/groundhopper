@@ -1,6 +1,9 @@
 package main
 
-import "net/http"
+import (
+  "auth"
+  "net/http"
+)
 
 type Route struct {
   Name        string
@@ -34,6 +37,6 @@ var routes = Routes {
     "PostCreateSession",
     "POST",
     "/sessions/create",
-    PostCreateSession,
+    auth.PostCreateSession,
   },
 }
