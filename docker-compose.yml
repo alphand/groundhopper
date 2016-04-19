@@ -3,6 +3,8 @@ groundhopper:
   command: gin run
   volumes:
     - ./server:/home/app/groundhopper/server
+  links:
+    - redis
   ports:
     - "3000:3000"
 couchdb:
@@ -10,3 +12,8 @@ couchdb:
   image: "klaemo/couchdb"
   ports:
     - "5984:5984"
+redis:
+  container_name: "redis"
+  image:"redis:alpine"
+  volumes:
+    - ./redis-data:/data

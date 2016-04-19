@@ -2,6 +2,7 @@ FROM golang:1.6.1-alpine
 MAINTAINER niko.darmawan@gmail.com
 
 RUN apk add --update git && \
+  apk add --update tinyssh && \
   addgroup app && \
   adduser -h /home/app -s /bin/false -G app -D app && \
   go get github.com/codegangsta/gin
