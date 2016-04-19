@@ -30,4 +30,10 @@ var routes = Routes {
     `/proxy/{rest:[a-zA-Z0-9=\-\/_:\.]+}`,
     ProxyHandler,
   },
+  Route{
+    "PostCreateSession",
+    "POST",
+    "/sessions/create",
+    PostCreateSession,
+  },
 }

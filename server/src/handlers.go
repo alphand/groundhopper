@@ -2,13 +2,24 @@ package main
 
 import (
   "proxy"
+  // "auth"
+
+  "encoding/json"
 
   "net/http"
 
   "fmt"
+  "log"
   "runtime"
 
   "github.com/gorilla/mux"
+
+
+  //
+  // "github.com/dgrijalva/jwt-go"
+  // "github.com/gorilla/context"
+  // "github.com/auth0/go-jwt-middleware"
+
 )
 
 func ProxyHandler (w http.ResponseWriter, r *http.Request) {
@@ -27,4 +38,23 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 func AccountsIndex(w http.ResponseWriter, r *http.Request) {
   fmt.Fprintln(w, "testing library")
+}
+
+type Creds struct {
+  Email string `json:"email"`
+  Password string `json:"password"`
+}
+
+func PostCreateSession(w http.ResponseWriter, r *http.Request) {
+  decoder := json.NewDecoder(r.Body)
+  var cred Creds
+  err := decoder.Decode(&cred)
+
+  if err != nil {
+    panic("Cannot decode")
+  }
+
+  log.Printf("decode param: email => %s, pass => %s", cred.Email, cred.Password)
+
+  fmt.Fprintf(w, "Post create session: %s -- %s", cred.Email, cred.Password)
 }

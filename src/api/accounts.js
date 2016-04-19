@@ -1,14 +1,17 @@
 import Vue from './apiBase'
 
 export const getLogin = (email, password) => {
-  const accEndPoints = '/api/proxy/192.168.99.100:5984/lvo-accounts/' +
-    '_design/email_finder/_view/email_finder'
+  // const accEndPoints = '/api/proxy/192.168.99.100:5984/lvo-accounts/' +
+  //   '_design/email_finder/_view/email_finder'
+
+  const createSessionEP = '/api/sessions/create'
 
   const opts = {
-    url: accEndPoints,
-    method: 'GET',
-    params: {
-      key: JSON.stringify(email)
+    url: createSessionEP,
+    method: 'POST',
+    data: {
+      email: email,
+      password: password
     }
   }
 
