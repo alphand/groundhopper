@@ -10,3 +10,4 @@ server/bin
 server/pkg
 server/src/gin-bin
 server/src/github.com
+server/src/golang.org
