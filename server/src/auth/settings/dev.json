@@ -1,0 +1,5 @@
+{
+  "PrivateKeyPath": "/home/app/groundhopper/server/src/settings/keys/private_key",
+  "PublicKeyPath": "/home/app/groundhopper/server/src/settings/keys/public_key.pub",
+  "JWTExpirationDelta": 72
+}

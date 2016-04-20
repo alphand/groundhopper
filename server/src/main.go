@@ -1,10 +1,12 @@
 package main
 
 import (
+  "auth/settings"
   "os"
   "log"
 
   "github.com/codegangsta/negroni"
+  "routers"
 )
 
 func main() {
@@ -13,7 +15,9 @@ func main() {
     log.Fatal("PORT environment variable was not set!")
   }
 
-  router := NewRouter()
+  settings.Init()
+
+  router := routers.InitRoutes()
 
   n := negroni.Classic()
   n.UseHandler(router)

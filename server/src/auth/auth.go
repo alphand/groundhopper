@@ -11,14 +11,10 @@ import (
   "time"
 
   "auth/models"
-
-  // "github.com/dgrijalva/jwt-go"
-  // "github.com/gorilla/context"
-  // "github.com/auth0/go-jwt-middleware"k
 )
 
 
-func getAccount(email string) (*models.EmailCred, error) {
+func getAccount(email string) (*models.User, error) {
   keyemail, _ := json.Marshal(email)
   url := fmt.Sprintf("http://192.168.99.100:5984/lvo-accounts/_design/email_finder/_view/email_finder?key=%s", keyemail)
 
@@ -50,7 +46,8 @@ func getAccount(email string) (*models.EmailCred, error) {
     return nil, errors.New("No email found!")
   }
 
-  return &models.EmailCred{
+  return &models.User{
+    UUID: data.Rows[0].Value.UUID,
     Email: data.Rows[0].Value.Email,
     Password: data.Rows[0].Value.Password,
   }, nil;
