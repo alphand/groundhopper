@@ -4,7 +4,7 @@ export const getLogin = (email, password) => {
   // const accEndPoints = '/api/proxy/192.168.99.100:5984/lvo-accounts/' +
   //   '_design/email_finder/_view/email_finder'
 
-  const createSessionEP = '/api/sessions/create'
+  const createSessionEP = '/api/accounts/login'
 
   const opts = {
     url: createSessionEP,

@@ -1,5 +1,5 @@
 {
-  "PrivateKeyPath": "/home/app/groundhopper/server/src/settings/keys/private_key",
-  "PublicKeyPath": "/home/app/groundhopper/server/src/settings/keys/public_key.pub",
+  "PrivateKeyPath": "/home/app/groundhopper/server/src/auth/settings/keys/jwt-rsa.pem",
+  "PublicKeyPath": "/home/app/groundhopper/server/src/auth/settings/keys/jwt-rsa.pub",
   "JWTExpirationDelta": 72
 }

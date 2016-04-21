@@ -1,6 +1,13 @@
-# glasspilot
+# GroundHopper
 
-> A Vue.js project
+> A Vue.js FrontEnd project with Go as the backend
+
+## authentication
+Create your own verification keys
+```bash
+openssl genrsa -out mykey.pem 1024
+openssl rsa -in mykey.pem -pubout > mykey.pub
+```
 
 ## Build Setup
 

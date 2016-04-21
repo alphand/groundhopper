@@ -8,7 +8,7 @@ import (
 )
 
 var envs = map[string]string {
-  "dev": "settings/dev.json",
+  "dev": "/home/app/groundhopper/server/src/auth/settings/dev.json",
   "prod": "settings/prod.json",
 }
 
