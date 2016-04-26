@@ -11,3 +11,4 @@ server/pkg
 server/src/gin-bin
 server/src/github.com
 server/src/golang.org
+server/src/gopkg.in
