@@ -55,6 +55,16 @@ func (backend *JWTAuthBackend) GenerateToken(userUUID string) (string, error) {
   return tokenString, nil
 }
 
+func (backend *JWTAuthBackend) Register(user *models.User) (models.User, error) {
+  hashedPass, _ := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
+  user.Password = string(hashedPass)
+
+  return models.User{
+    Email: "email",
+    Password: "pass",
+  }, nil
+}
+
 func (backend *JWTAuthBackend) Authenticate(user *models.User) bool {
   hashedPass, _ := bcrypt.GenerateFromPassword([]byte("testing"), 10)
 

@@ -1,5 +1,9 @@
 package models
 
+import (
+  "auth/settings"
+)
+
 type Auth struct {
   Authenticated     bool        `json:"authenticated"`
   TokenId           string      `json:"tokenId"`
@@ -22,19 +26,35 @@ type EmailFinder struct {
   } `json:"rows"`
 }
 
-type User struct {
-  ID string         `json:"_id"`
-  Rev string        `json:"_rev"`
-  UUID string       `json:"uuid"`
-  Email string      `json:"email"`
-  Password string   `json:"password"`
-}
-
 type PostCreds struct {
   Email string `json:"email"`
   Password string `json:"password"`
 }
 
 type TokenAuthentication struct {
-  Token string `json:"token" form:"token"` 
+  Token string `json:"token" form:"token"`
+}
+
+type CouchDB struct {
+  ConnStr string
+}
+
+type Model interface {
+  Save() (interface{}, error)
+}
+
+var couchDB CouchDB = CouchDB{}
+
+func Init() {
+  couchDB = CouchDB{
+    ConnStr: settings.Get().DBConn,
+  }
+}
+
+func Get() CouchDB {
+  if &couchDB == nil {
+    Init()
+  }
+
+  return couchDB
 }

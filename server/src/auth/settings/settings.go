@@ -8,7 +8,8 @@ import (
 )
 
 var envs = map[string]string {
-  "dev": "/home/app/groundhopper/server/src/auth/settings/dev.json",
+  "dev":  "/home/app/groundhopper/server/src/auth/settings/dev.json",
+  "test": "/home/app/groundhopper/server/src/auth/settings/test.json",
   "prod": "settings/prod.json",
 }
 
@@ -16,6 +17,7 @@ type Settings struct {
   PrivateKeyPath        string
   PublicKeyPath         string
   JWTExpirationDelta    int
+  DBConn                string
 }
 
 var settings Settings = Settings{}
