@@ -40,6 +40,7 @@ type CouchDB struct {
 }
 
 type Model interface {
+  Get()  (interface{}, error)
   Save() (interface{}, error)
 }
 

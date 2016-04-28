@@ -2,5 +2,5 @@
   "PrivateKeyPath": "/home/app/groundhopper/server/src/auth/settings/keys/jwt-rsa.pem",
   "PublicKeyPath": "/home/app/groundhopper/server/src/auth/settings/keys/jwt-rsa.pub",
   "JWTExpirationDelta": 72,
-  "DBConn": "http://192.168.99.100:5984/"
+  "DBConn": "http://192.168.99.100:5984"
 }

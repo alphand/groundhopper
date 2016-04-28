@@ -27,12 +27,14 @@ func (s *AuthBackendTestSuite) SetUpSuite(c *C)  {
   models.Init()
 }
 
-func (suite *AuthBackendTestSuite) TestModelConnection(c *C) {
+func (suite *AuthBackendTestSuite) TestSaveUser(c *C) {
   var dbConn = "http://192.168.99.100:5984/"
 
-  userMdl := &models.User{
-    Email: "email",
-    Password: "pass",
+  newUserMdl := &models.User{
+    Email: "test@example.com",
+    Password: "1234aa",
   }
-  c.Assert(userMdl.DBConn(), Equals, dbConn)
+
+  newUserMdl.Save(newUserMdl)
+  c.Assert(newUserMdl.DBConn(), Equals, dbConn)
 }
