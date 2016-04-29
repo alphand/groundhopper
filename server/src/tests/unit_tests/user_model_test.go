@@ -27,7 +27,13 @@ func (s *AuthBackendTestSuite) SetUpSuite(c *C)  {
   models.Init()
 }
 
-func (suite *AuthBackendTestSuite) TestSaveUser(c *C) {
+func (suite *AuthBackendTestSuite) TestGetUserByEmail(c *C) {
+  userEmail := "darmawan.niko@gmail.com"
+  user, _ := models.GetUserByEmail(userEmail)
+  c.Assert(user.Email, Equals, userEmail)
+}
+
+func (suite *AuthBackendTestSuite) PendingSaveUser(c *C) {
   var dbConn = "http://192.168.99.100:5984/"
 
   newUserMdl := &models.User{
